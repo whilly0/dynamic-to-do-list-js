@@ -1,11 +1,11 @@
-// Wait for the DOM to be fully loaded before running any script
+// Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Select DOM elements
+    // Select the input, button, and task list elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Function to add a task
+    // Function to add a new task
     function addTask() {
         const taskText = taskInput.value.trim();
 
@@ -14,21 +14,21 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Create a new list item
+        // Create a new list item element
         const listItem = document.createElement('li');
         listItem.textContent = taskText;
 
         // Create a remove button
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
-        removeButton.className = 'remove-btn';
+        removeButton.classList.add('remove-btn'); // Correct way to assign class
 
-        // Add click event to remove the task
+        // When the remove button is clicked, remove the parent list item
         removeButton.onclick = function () {
             taskList.removeChild(listItem);
         };
 
-        // Append the remove button to the list item
+        // Append remove button to the list item
         listItem.appendChild(removeButton);
 
         // Append the list item to the task list
@@ -38,15 +38,14 @@ document.addEventListener('DOMContentLoaded', function () {
         taskInput.value = '';
     }
 
-    // Add event listener to the add button
+    // Add task on button click
     addButton.addEventListener('click', addTask);
 
-    // Allow task to be added with Enter key
+    // Add task on pressing 'Enter' key
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 });
-
 
